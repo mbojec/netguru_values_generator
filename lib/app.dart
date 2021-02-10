@@ -9,13 +9,7 @@ class App extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: CustomSplash(
-        imagePath: 'assets/images/ic_launcher.png',
-        backGroundColor: Colors.grey,
-        logoSize: 50,
-        duration: 2000,
-        home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      ),
+      home: const MyHomePage(title: 'Flutter Demo Homertree Page'),
     );
   }
 }
