@@ -13,10 +13,25 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.0
 
+  # UI
+  custom_splash: 0.0.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   lint: ^1.3.0
+  build_runner: 1.11.1
+  flutter_launcher_icons: "0.8.1"
+  flutter_launcher_name: "0.0.1"
+  logger: ^0.9.4
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/ic_launcher.png"
+
+flutter_launcher_name:
+  name: "Netguru VG"
 
 flutter:
 
