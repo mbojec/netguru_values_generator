@@ -99,6 +99,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "7.1.0"
+  carousel_slider:
+    dependency: "direct main"
+    description:
+      name: carousel_slider
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.0"
   characters:
     dependency: transitive
     description:
@@ -223,6 +230,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.1"
+  flutter_neumorphic:
+    dependency: "direct dev"
+    description:
+      path: "."
+      ref: cleanup
+      resolved-ref: bb353f6a2a2f33503c6bc2b91f23cee3ba869e97
+      url: "https://github.com/coredeveloper/flutter-neumorphic.git"
+    source: git
+    version: "3.0.4+1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -291,6 +307,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.1"
+  keyboard_dismisser:
+    dependency: "direct main"
+    description:
+      name: keyboard_dismisser
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
+  keyboard_visibility:
+    dependency: "direct main"
+    description:
+      name: keyboard_visibility
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.5.6"
   lint:
     dependency: "direct dev"
     description:
@@ -522,3 +552,4 @@ packages:
     version: "2.2.1"
 sdks:
   dart: ">=2.10.0 <2.11.0"
+  flutter: ">=0.1.4 <2.0.0"
