@@ -4,9 +4,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:netguru_values_generator/components/animated_btn.dart';
+import 'package:netguru_values_generator/components/btn.dart';
 import 'package:netguru_values_generator/constants.dart';
 import 'package:netguru_values_generator/main.dart';
 import 'package:netguru_values_generator/screens/home/components/animated_quote_card.dart';
+import 'package:netguru_values_generator/theme/styles.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
@@ -20,8 +22,11 @@ class _HomeScreenState extends State<HomeScreen> {
     'Be brave, curious and experiment. Learn from all successes and failures', 'Act in a way that makes all of us proud',
     'Build an inclusive, transparent and socially responsible culture', 'Be ambitious, grow yourself and the people around you', 'Recognize excellence and engagement'];
   bool isFavorite = false;
+  CarouselController _carouselController;
+
   @override
   void initState() {
+    _carouselController = CarouselController();
     super.initState();
   }
 
@@ -30,25 +35,25 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: NeumorphicAppBar(
+        leading: NeumorphicTheme.isUsingDark(context) ? BumpButton(Icons.settings, (){
+          Navigator.of(context).pushNamed(RouteList.settings).then((_){
+            _carouselController.nextPage(duration: const Duration(milliseconds: 1));
+          });
+        }, context) : ConcaveButton(onPressed: (){
+          Navigator.of(context).pushNamed(RouteList.settings).then((_){
+            _carouselController.nextPage(duration: const Duration(milliseconds: 1));
+          });
+        }, context: context, icon: Icons.settings),
         centerTitle: true,
-        title: NeumorphicText(
-          'NG Values',
-          textStyle: NeumorphicTextStyle(
-              fontSize: 24.0,
-              fontWeight: FontWeight.bold
-          ),
-          style: const NeumorphicStyle(
-              depth: 0,
-              color: Color(0xFFc2c6e0)
-          ),
-        ),
+        title: const Text('NG Values'),
         actions: <Widget>[
           AnimatedBtn(
+            activeColor: Colors.red,
+            context: context,
               onTap: (){
                 logger.i('Print');
               },
@@ -71,6 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: NeumorphicTheme.baseColor(context),
       body: Center(
         child: CarouselSlider(
+          carouselController: _carouselController,
           options: CarouselOptions(
             viewportFraction: 1.0,
             autoPlay: true,
@@ -80,30 +86,24 @@ class _HomeScreenState extends State<HomeScreen> {
           items: values.map((String quote) {
             return Builder(
               builder: (BuildContext context) {
-                return AnimatedQuoteCard(cardValue: quote);
+                return AnimatedQuoteCard(cardValue: quote, context: context);
               },
             );
           }).toList(),
         ),
       ),
-      floatingActionButton: NeumorphicButton(
+      floatingActionButton: NeumorphicTheme.isUsingDark(context) ? BumpButton(Icons.add, (){
+         Navigator.of(context).pushNamed(RouteList.editor);
+       }, context) : NeumorphicButton(
         onPressed: (){
           Navigator.of(context).pushNamed(RouteList.editor);
         },
-        style: const NeumorphicStyle(
-          boxShape: NeumorphicBoxShape.circle(),
-        ),
         padding: const EdgeInsets.all(16.0),
-        child: Icon(Icons.add, color: NeumorphicTheme.variantColor(context)),
+        child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Neumorphic(
-        style: NeumorphicStyle(
-            boxShape: const NeumorphicBoxShape.rect(),
-            depth: -NeumorphicTheme.depth(context),
-            lightSource: LightSource.topLeft,
-            color: NeumorphicTheme.variantColor(context)
-        ),
+        style: bottomNavigationBarStyle(context),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
@@ -119,10 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                       child: NeumorphicIcon(
                         Icons.list,
-                        style: NeumorphicStyle(
-                            depth: NeumorphicTheme.depth(context),
-                            color: NeumorphicTheme.baseColor(context)
-                        ),
+                        style: navigationBtnStyle(context),
                         size: 32.0,
                       ),
                     ),
@@ -137,10 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                       child: NeumorphicIcon(
                         Icons.favorite,
-                        style: NeumorphicStyle(
-                            depth: NeumorphicTheme.depth(context),
-                            color: NeumorphicTheme.baseColor(context)
-                        ),
+                        style: navigationBtnStyle(context),
                         size: 32.0,
                       ),
                     ),
@@ -148,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            const SizedBox(height: 24.0)
+            SizedBox(height: MediaQuery.of(context).size.width > 375.0 ? 24.0: 0.0)
           ],
         ),
       ),
