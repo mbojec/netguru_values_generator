@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:netguru_values_generator/components/btn.dart';
 import 'package:netguru_values_generator/components/quote_card.dart';
 
 class ListScreen extends StatefulWidget {
@@ -18,47 +19,20 @@ class _ListScreenState extends State<ListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: NeumorphicAppBar(
-        leading: GestureDetector(
-          onTap: (){
-            Navigator.of(context).pop();
-          },
-          child: Neumorphic(
-            style: NeumorphicStyle(
-                boxShape: const NeumorphicBoxShape.circle(),
-                depth: 20.0,
-                lightSource: LightSource.topLeft,
-                color: NeumorphicTheme.baseColor(context)
-            ),
-            child: Center(
-                child: NeumorphicIcon(
-                  Icons.arrow_back_ios_rounded,
-                  style: NeumorphicStyle(
-                      depth: 0,
-                      color: NeumorphicTheme.variantColor(context)
-                  ),
-                )
-            ),
-          ),
-        ),
+        leading: NeumorphicTheme.isUsingDark(context) ? BumpButton(Icons.arrow_back_ios_rounded, (){
+          Navigator.of(context).pop();
+        }, context) : ConcaveButton(onPressed: (){
+         Navigator.of(context).pop();
+        }, context: context, icon: Icons.arrow_back_ios_rounded),
         centerTitle: true,
-        title: NeumorphicText(
-          'Values',
-          textStyle: NeumorphicTextStyle(
-              fontSize: 24.0,
-              fontWeight: FontWeight.bold
-          ),
-          style: const NeumorphicStyle(
-              depth: 0,
-              color: Color(0xFFc2c6e0)
-          ),
-        ),
+        title: const Text('Values'),
       ),
       backgroundColor: NeumorphicTheme.baseColor(context),
       body: Center(
         child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.8,
           child: ListView.builder(
-              padding: const EdgeInsets.only(top: 16.0, bottom: 32.0),
+              padding: EdgeInsets.only(top: MediaQuery.of(context).size.width > 375.0 ? 16.0 : 0.0, bottom: MediaQuery.of(context).size.width > 375.0 ? 32.0 : 16.0),
               itemCount: values.length,
               itemBuilder: (BuildContext context, int position){
                 return QuoteCard(value: values[position]);

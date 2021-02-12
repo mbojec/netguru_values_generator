@@ -12,7 +12,7 @@ class QuoteCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 16.0),
       style: NeumorphicStyle(
           boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
-          depth: -NeumorphicTheme.depth(context),
+          depth: NeumorphicTheme.embossDepth(context),
           color: NeumorphicTheme.variantColor(context)
       ),
       child: ConstrainedBox(
@@ -26,10 +26,11 @@ class QuoteCard extends StatelessWidget {
               textStyle: NeumorphicTextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,
+                fontFamily: 'Orbitron'
               ),
               style: NeumorphicStyle(
                   depth: NeumorphicTheme.depth(context),
-                  color: NeumorphicTheme.baseColor(context)
+                  color: const Color(0xFFe8eafa)
               ),
             ),
           ),

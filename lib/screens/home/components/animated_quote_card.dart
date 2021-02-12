@@ -1,10 +1,10 @@
 import 'package:flutter/widgets.dart';
-import 'package:netguru_values_generator/main.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class AnimatedQuoteCard extends StatefulWidget {
   final String cardValue;
-  const AnimatedQuoteCard({@required this.cardValue});
+  final BuildContext context;
+  const AnimatedQuoteCard({@required this.cardValue, @required this.context});
 
   @override
   _AnimatedQuoteCardState createState() => _AnimatedQuoteCardState();
@@ -17,7 +17,6 @@ class _AnimatedQuoteCardState extends State<AnimatedQuoteCard>  with SingleTicke
 
   @override
   void initState() {
-    // logger.i('Initial state');
     _animationController = AnimationController(
       duration: const Duration(seconds: 2),
       vsync: this,
@@ -40,8 +39,13 @@ class _AnimatedQuoteCardState extends State<AnimatedQuoteCard>  with SingleTicke
       end: 20.0,
     ).animate(_animationController);
 
-    _textColorAnimation = ColorTween(begin: const Color(0xFFc2c6e0), end: const Color(0xFFe8eafa)).animate(_animationController);
-    _cardColorAnimation = ColorTween(begin: const Color(0xFFe8eafa), end: const Color(0xFFc2c6e0)).animate(_animationController);
+    if(NeumorphicTheme.isUsingDark(widget.context)){
+      _textColorAnimation = ColorTween(begin: const Color(0xFF8a8c8f), end: const Color(0xFFe8eafa)).animate(_animationController);
+      _cardColorAnimation = ColorTween(begin: const Color(0xFF35393e), end: const Color(0xFF212529)).animate(_animationController);
+    } else {
+      _textColorAnimation = ColorTween(begin: const Color(0xFFc2c6e0), end: const Color(0xFFe8eafa)).animate(_animationController);
+      _cardColorAnimation = ColorTween(begin: const Color(0xFFe8eafa), end: const Color(0xFFc2c6e0)).animate(_animationController);
+    }
 
     Future<void>.delayed(const Duration(milliseconds: 1500),(){
       _animationController.forward();
@@ -79,6 +83,7 @@ class _AnimatedQuoteCardState extends State<AnimatedQuoteCard>  with SingleTicke
                   textStyle: NeumorphicTextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
+                      fontFamily: 'Orbitron'
                   ),
                   style: NeumorphicStyle(
                       depth: _textDepthAnimation.value,

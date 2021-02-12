@@ -4,6 +4,7 @@ import 'package:netguru_values_generator/screens/editor/editor_screen.dart';
 import 'package:netguru_values_generator/screens/favorite/favorite_screen.dart';
 import 'package:netguru_values_generator/screens/home/home_screen.dart';
 import 'package:netguru_values_generator/screens/list/list_screen.dart';
+import 'package:netguru_values_generator/screens/settings/settings_screen.dart';
 
 class Routes {
   static Route getRouteGenerate(RouteSettings settings) =>
@@ -24,6 +25,9 @@ class Routes {
         break;
       case RouteList.editor:
         return _FadedTransitionRoute(widget: EditorScreen(), settings: settings);
+        break;
+      case RouteList.settings:
+        return _FadedTransitionRoute(widget: SettingsScreen(), settings: settings);
         break;
       default:
         return _FadedTransitionRoute(
