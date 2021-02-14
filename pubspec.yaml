@@ -1,9 +1,9 @@
 name: netguru_values_generator
-description: Netguru Values generator app created for recrutment purpose.
+description: Netguru values generator app created for recruitment  purpose.
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none'
 
-version: 0.1.0+1
+version: 1.0.0+1
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
