@@ -1,14 +1,15 @@
-import 'dart:io';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:netguru_values_generator/components/animated_btn.dart';
+import 'package:netguru_values_generator/blocs/quotes/quotes.dart';
+import 'package:netguru_values_generator/blocs/quotes/state.dart';
 import 'package:netguru_values_generator/components/btn.dart';
 import 'package:netguru_values_generator/constants.dart';
-import 'package:netguru_values_generator/main.dart';
+import 'package:netguru_values_generator/models/quote.dart';
 import 'package:netguru_values_generator/screens/home/components/animated_quote_card.dart';
 import 'package:netguru_values_generator/theme/styles.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
@@ -18,21 +19,61 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<String> values = <String>["Exceed clients' and colleagues' expectations", 'Take ownership and question the status quo in a constructive manner',
-    'Be brave, curious and experiment. Learn from all successes and failures', 'Act in a way that makes all of us proud',
-    'Build an inclusive, transparent and socially responsible culture', 'Be ambitious, grow yourself and the people around you', 'Recognize excellence and engagement'];
   bool isFavorite = false;
+  int indexValue = 0;
   CarouselController _carouselController;
 
   @override
   void initState() {
     _carouselController = CarouselController();
+    context.read<QuotesCubit>().getQuotes();
     super.initState();
   }
 
   @override
   void dispose() {
     super.dispose();
+  }
+
+  void callback(int randomValue){
+    setState(() {
+      isFavorite = context.read<QuotesCubit>().list[randomValue].isFavorite;
+      indexValue = randomValue;
+    });
+  }
+
+  Widget _body(){
+    return BlocBuilder<QuotesCubit, QuotesState>(
+        builder: (BuildContext context, QuotesState state) {
+          if (state is QuotesInitial) {
+            return Container();
+          } else if (state is QuotesLoading) {
+            return const Center(
+                child: NeumorphicProgressIndeterminate(duration: Duration(seconds: 10),));
+          } else if (state is QuotesLoaded) {
+            return Center(
+              child: CarouselSlider(
+                carouselController: _carouselController,
+                options: CarouselOptions(
+                  scrollPhysics: const NeverScrollableScrollPhysics(),
+                  viewportFraction: 1.0,
+                  autoPlay: true,
+                  autoPlayInterval: const Duration(seconds: 5),
+                  autoPlayAnimationDuration: const Duration(milliseconds: 500),
+                ),
+                items: state.quotes.map((Quote quote) {
+                  return Builder(
+                    builder: (BuildContext context) {
+                      return AnimatedQuoteCard(quotes: state.quotes, context: context, callback: callback);
+                    },
+                  );
+                }).toList(),
+              )
+            );
+          } else {
+            return Center(child: Text((state as QuotesError).message));
+          }
+        });
   }
 
   @override
@@ -51,55 +92,54 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         title: const Text('NG Values'),
         actions: <Widget>[
-          AnimatedBtn(
-            activeColor: Colors.red,
-            context: context,
+          GestureDetector(
               onTap: (){
-                logger.i('Print');
+                HapticFeedback.mediumImpact();
+                setState(() {
+                  isFavorite = !isFavorite;
+                });
+                context.read<QuotesCubit>().changeFavoriteState(context.read<QuotesCubit>().list[indexValue]);
               },
-              enableReverseAnimation: true,
-              animationCallback: (AnimationStatus status){
-                if (status == AnimationStatus.completed) {
-                  setState(() {
-                    isFavorite = true;
-                  });
-                } else if (status == AnimationStatus.dismissed) {
-                  setState(() {
-                    isFavorite = false;
-                  });
-                }
-              },
-              icon: isFavorite ? Icons.favorite : Icons.favorite_border)
-          // LikeBtn()
+              child: Neumorphic(
+                style: NeumorphicStyle(
+                    shape:  isFavorite ? null : NeumorphicShape.flat,
+                    boxShape: const NeumorphicBoxShape.circle(),
+                    depth:  isFavorite ? NeumorphicTheme.embossDepth(context) : NeumorphicTheme.depth(context),
+                    lightSource: LightSource.topLeft,
+                    color: isFavorite ? NeumorphicTheme.variantColor(context) : NeumorphicTheme.baseColor(context),
+                ),
+                child: Center(
+                    child: NeumorphicIcon(
+                      isFavorite ? Icons.favorite : Icons.favorite_border_outlined,
+                      style: NeumorphicStyle(
+                          depth: isFavorite ? 20.0 : 0.0,
+                          color: isFavorite ? Colors.red : NeumorphicTheme.variantColor(context)
+                      ),
+                    )
+                  // Icon(Icons.favorite_border_outlined, color: tap ? Colors.red : Colors.grey),
+                ),
+              )
+          ),
         ],
       ),
       backgroundColor: NeumorphicTheme.baseColor(context),
-      body: Center(
-        child: CarouselSlider(
-          carouselController: _carouselController,
-          options: CarouselOptions(
-            viewportFraction: 1.0,
-            autoPlay: true,
-            autoPlayInterval: const Duration(seconds: 5),
-            autoPlayAnimationDuration: const Duration(milliseconds: 500),
-              ),
-          items: values.map((String quote) {
-            return Builder(
-              builder: (BuildContext context) {
-                return AnimatedQuoteCard(cardValue: quote, context: context);
-              },
-            );
-          }).toList(),
-        ),
-      ),
+      body: _body(),
       floatingActionButton: NeumorphicTheme.isUsingDark(context) ? BumpButton(Icons.add, (){
-         Navigator.of(context).pushNamed(RouteList.editor);
+        Navigator.of(context).pushNamed(RouteList.editor).then((Object newQuoteCreated){
+          if(newQuoteCreated){
+            context.read<QuotesCubit>().updateQuotes();
+          }
+        });
        }, context) : NeumorphicButton(
         onPressed: (){
-          Navigator.of(context).pushNamed(RouteList.editor);
+          Navigator.of(context).pushNamed(RouteList.editor).then((Object newQuoteCreated){
+            if(newQuoteCreated){
+              context.read<QuotesCubit>().updateQuotes();
+            }
+          });
         },
         padding: const EdgeInsets.all(16.0),
-        child: const Icon(Icons.add),
+        child: Icon(Icons.add, color: NeumorphicTheme.defaultTextColor(context),),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Neumorphic(
@@ -115,6 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Expanded(
                     child: GestureDetector(
                       onTap: (){
+                        HapticFeedback.mediumImpact();
                         Navigator.of(context).pushNamed(RouteList.list);
                       },
                       child: NeumorphicIcon(
@@ -130,6 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Expanded(
                     child: GestureDetector(
                       onTap: (){
+                        HapticFeedback.mediumImpact();
                         Navigator.of(context).pushNamed(RouteList.favorite);
                       },
                       child: NeumorphicIcon(

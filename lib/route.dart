@@ -7,9 +7,11 @@ import 'package:netguru_values_generator/screens/list/list_screen.dart';
 import 'package:netguru_values_generator/screens/settings/settings_screen.dart';
 
 class Routes {
+  // ignore: always_specify_types
   static Route getRouteGenerate(RouteSettings settings) =>
       _routeGenerate(settings);
 
+  // ignore: always_specify_types
   static Route _routeGenerate(RouteSettings settings) {
     switch (settings.name) {
       case RouteList.home:
@@ -37,8 +39,10 @@ class Routes {
   }
 }
 
+// ignore: always_specify_types
 class _FadedTransitionRoute extends PageRouteBuilder {
   final Widget widget;
+  @override
   final RouteSettings settings;
 
   _FadedTransitionRoute({this.widget, this.settings})

@@ -1,22 +1,19 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:netguru_values_generator/main.dart';
-import 'package:netguru_values_generator/storage/internal.dart';
 
-class AnimatedBtn extends StatefulWidget {
+class SaveBtn extends StatefulWidget {
   final Function() onTap;
   final Function(AnimationStatus) animationCallback;
-  final IconData icon;
-  final bool enableReverseAnimation;
   final BuildContext context;
-  final Color activeColor;
-  const AnimatedBtn({@required this.onTap, @required this.icon, this.animationCallback, this.enableReverseAnimation = false, @required this.context, @required this.activeColor});
+  final bool enable;
+  final Function() disableTapCallback;
+  const SaveBtn({@required this.onTap, this.animationCallback, @required this.context, this.enable = true, this.disableTapCallback});
 
   @override
-  _AnimatedBtnState createState() => _AnimatedBtnState();
+  _SaveBtnState createState() => _SaveBtnState();
 }
 
-class _AnimatedBtnState extends State<AnimatedBtn> with SingleTickerProviderStateMixin {
+class _SaveBtnState extends State<SaveBtn> with SingleTickerProviderStateMixin {
   AnimationStatus status;
   AnimationController _animationController;
   Animation<double> _btnDepthAnimation, _iconDepthAnimation;
@@ -41,7 +38,7 @@ class _AnimatedBtnState extends State<AnimatedBtn> with SingleTickerProviderStat
     ).animate(_animationController);
 
     _btnColorAnimation = ColorTween(begin: NeumorphicTheme.baseColor(widget.context), end: NeumorphicTheme.variantColor(widget.context)).animate(_animationController);
-    _iconColorAnimation = ColorTween(begin: NeumorphicTheme.variantColor(widget.context), end: widget.activeColor).animate(_animationController);
+    _iconColorAnimation = ColorTween(begin: NeumorphicTheme.variantColor(widget.context), end: NeumorphicTheme.accentColor(widget.context),).animate(_animationController);
 
     _animationController.addStatusListener((AnimationStatus status) {
       if (status == AnimationStatus.completed || status == AnimationStatus.dismissed) {
@@ -60,7 +57,7 @@ class _AnimatedBtnState extends State<AnimatedBtn> with SingleTickerProviderStat
   @override
   void didUpdateWidget(Widget oldWidget) {
     _btnColorAnimation = ColorTween(begin: NeumorphicTheme.baseColor(widget.context), end: NeumorphicTheme.variantColor(widget.context)).animate(_animationController);
-    _iconColorAnimation = ColorTween(begin: NeumorphicTheme.variantColor(widget.context), end: widget.activeColor).animate(_animationController);
+    _iconColorAnimation = ColorTween(begin: NeumorphicTheme.variantColor(widget.context), end: NeumorphicTheme.accentColor(widget.context)).animate(_animationController);
     super.didUpdateWidget(oldWidget);
   }
 
@@ -74,18 +71,12 @@ class _AnimatedBtnState extends State<AnimatedBtn> with SingleTickerProviderStat
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: (){
-          if(widget.enableReverseAnimation){
-            if(status != null && status == AnimationStatus.completed){
-              _animationController.reverse();
-            } else if(status != null && status == AnimationStatus.dismissed){
-              _animationController.forward();
-            } else {
-              _animationController.forward();
-            }
-          } else {
+          if(widget.enable){
             _animationController.forward();
+            widget.onTap();
+          } else if(widget.disableTapCallback != null){
+            widget.disableTapCallback();
           }
-          widget.onTap();
         },
         child: AnimatedBuilder(
           animation: _animationController,
@@ -100,7 +91,7 @@ class _AnimatedBtnState extends State<AnimatedBtn> with SingleTickerProviderStat
               ),
               child: Center(
                   child: NeumorphicIcon(
-                    widget.icon,
+                    Icons.save,
                     style: NeumorphicStyle(
                         depth: _iconDepthAnimation.value,
                         color: _iconColorAnimation.value
