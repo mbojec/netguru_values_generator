@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:netguru_values_generator/models/quote.dart';
 
 
 class QuoteCard extends StatelessWidget {
-  final String value;
+  final Quote value;
   const QuoteCard({@required this.value});
 
   @override
@@ -22,7 +23,7 @@ class QuoteCard extends StatelessWidget {
           child: Center(
             heightFactor: 1.0,
             child: NeumorphicText(
-              value,
+              value.content,
               textStyle: NeumorphicTextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,

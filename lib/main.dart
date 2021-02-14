@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
 import 'package:netguru_values_generator/app.dart';
-import 'package:netguru_values_generator/storage/internal.dart';
 
 final Logger logger = Logger(
   printer: PrettyPrinter(
@@ -22,9 +21,7 @@ Future<void> main() async {
       statusBarColor: Colors.transparent
   ));
 
-  SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
-
-  InternalStorage();
+  SystemChrome.setEnabledSystemUIOverlays(<SystemUiOverlay>[SystemUiOverlay.bottom]);
 
   runApp(App());
 }

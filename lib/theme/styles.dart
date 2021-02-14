@@ -14,3 +14,15 @@ NeumorphicStyle bottomNavigationBarStyle(BuildContext context){
       color: NeumorphicTheme.variantColor(context)
   );
 }
+
+TextStyle infoTextStyle(BuildContext context){
+  return TextStyle(color: NeumorphicTheme.defaultTextColor(context), fontSize: 18.0, fontFamily: 'Orbitron');
+}
+
+TextStyle errorTextStyle(){
+  return const TextStyle(color: Colors.red, fontSize: 18.0, fontFamily: 'Orbitron');
+}
+
+TextStyle inputTextStyle(BuildContext context){
+  return TextStyle(color: NeumorphicTheme.defaultTextColor(context), fontWeight: FontWeight.bold, fontSize: 18.0, fontFamily: 'Orbitron');
+}

@@ -4,6 +4,7 @@ class InternalStorage {
   SharedPreferences prefs;
   static final InternalStorage _instance = InternalStorage._internal();
   factory InternalStorage() => _instance;
+  InternalStorage._internal();
 
   bool get isUsingDark {
     return prefs.getBool('is_dark_theme') ?? false;
@@ -13,8 +14,12 @@ class InternalStorage {
     prefs.setBool('is_dark_theme', isUsingDark);
   }
 
-  InternalStorage._internal(){
-    init();
+  bool get isInitialLaunch {
+    return prefs.getBool('is_initial_launch') ?? true;
+  }
+
+  set isInitialLaunch(bool isInitialLaunch){
+    prefs.setBool('is_initial_launch', isInitialLaunch);
   }
 
   Future<void> init() async {

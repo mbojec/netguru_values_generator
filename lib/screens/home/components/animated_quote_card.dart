@@ -1,22 +1,32 @@
+import 'dart:math';
+
+import 'package:after_layout/after_layout.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:netguru_values_generator/models/quote.dart';
 
 class AnimatedQuoteCard extends StatefulWidget {
-  final String cardValue;
+  final List<Quote> quotes;
   final BuildContext context;
-  const AnimatedQuoteCard({@required this.cardValue, @required this.context});
+  final Function(int) callback;
+  const AnimatedQuoteCard({@required this.quotes, @required this.context, this.callback});
 
   @override
   _AnimatedQuoteCardState createState() => _AnimatedQuoteCardState();
 }
 
-class _AnimatedQuoteCardState extends State<AnimatedQuoteCard>  with SingleTickerProviderStateMixin {
+class _AnimatedQuoteCardState extends State<AnimatedQuoteCard>  with SingleTickerProviderStateMixin, AfterLayoutMixin<AnimatedQuoteCard> {
   AnimationController _animationController;
   Animation<double> _cardDepthAnimation, _textDepthAnimation;
   Animation<Color> _textColorAnimation, _cardColorAnimation;
+  int randomValue;
+  String value;
 
   @override
   void initState() {
+    randomValue = Random().nextInt(widget.quotes.length - 1);
+    value = widget.quotes[randomValue].content;
+
     _animationController = AnimationController(
       duration: const Duration(seconds: 2),
       vsync: this,
@@ -50,7 +60,6 @@ class _AnimatedQuoteCardState extends State<AnimatedQuoteCard>  with SingleTicke
     Future<void>.delayed(const Duration(milliseconds: 1500),(){
       _animationController.forward();
     });
-
     super.initState();
   }
 
@@ -79,7 +88,7 @@ class _AnimatedQuoteCardState extends State<AnimatedQuoteCard>  with SingleTicke
               child: Center(
                 heightFactor: 1.0,
                 child: NeumorphicText(
-                  widget.cardValue,
+                  value,
                   textStyle: NeumorphicTextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
@@ -96,5 +105,10 @@ class _AnimatedQuoteCardState extends State<AnimatedQuoteCard>  with SingleTicke
         );
       },
     );
+  }
+
+  @override
+  void afterFirstLayout(BuildContext context) {
+    widget.callback(randomValue);
   }
 }
