@@ -1,6 +1,6 @@
 # netguru_values_generator
 
-Netguru Values generator app created for recrutment purpose.
+Netguru Values generator app created for recruitment purpose.
 
 ## Getting Started
 
