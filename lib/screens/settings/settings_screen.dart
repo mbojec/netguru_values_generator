@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:netguru_values_generator/components/bottom_bar.dart';
-import 'package:netguru_values_generator/components/btn.dart';
-import 'package:netguru_values_generator/screens/settings/components/theme_switch.dart';
+import 'package:quotes_generator/components/bottom_bar.dart';
+import 'package:quotes_generator/components/btn.dart';
+import 'package:quotes_generator/screens/settings/components/theme_switch.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override

@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:netguru_values_generator/models/quote.dart';
+import 'package:quotes_generator/models/quote.dart';
 
 class AnimatedQuoteCard extends StatefulWidget {
   final List<Quote> quotes;

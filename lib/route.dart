@@ -1,10 +1,10 @@
 import 'package:flutter/widgets.dart';
-import 'package:netguru_values_generator/constants.dart';
-import 'package:netguru_values_generator/screens/editor/editor_screen.dart';
-import 'package:netguru_values_generator/screens/favorite/favorite_screen.dart';
-import 'package:netguru_values_generator/screens/home/home_screen.dart';
-import 'package:netguru_values_generator/screens/list/list_screen.dart';
-import 'package:netguru_values_generator/screens/settings/settings_screen.dart';
+import 'package:quotes_generator/constants.dart';
+import 'package:quotes_generator/screens/editor/editor_screen.dart';
+import 'package:quotes_generator/screens/favorite/favorite_screen.dart';
+import 'package:quotes_generator/screens/home/home_screen.dart';
+import 'package:quotes_generator/screens/list/list_screen.dart';
+import 'package:quotes_generator/screens/settings/settings_screen.dart';
 
 class Routes {
   // ignore: always_specify_types

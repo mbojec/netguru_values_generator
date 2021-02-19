@@ -2,13 +2,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:netguru_values_generator/blocs/quotes/quotes.dart';
-import 'package:netguru_values_generator/blocs/quotes/state.dart';
-import 'package:netguru_values_generator/components/btn.dart';
-import 'package:netguru_values_generator/constants.dart';
-import 'package:netguru_values_generator/models/quote.dart';
-import 'package:netguru_values_generator/screens/home/components/animated_quote_card.dart';
-import 'package:netguru_values_generator/theme/styles.dart';
+import 'package:quotes_generator/blocs/quotes/quotes.dart';
+import 'package:quotes_generator/blocs/quotes/state.dart';
+import 'package:quotes_generator/components/btn.dart';
+import 'package:quotes_generator/constants.dart';
+import 'package:quotes_generator/models/quote.dart';
+import 'package:quotes_generator/screens/home/components/animated_quote_card.dart';
+import 'package:quotes_generator/theme/styles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -90,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
           });
         }, context: context, icon: Icons.settings),
         centerTitle: true,
-        title: const Text('NG Values'),
+        title: const Text('Quotes'),
         actions: <Widget>[
           GestureDetector(
               onTap: (){

@@ -1,4 +1,4 @@
-import 'package:netguru_values_generator/models/quote.dart';
+import 'package:quotes_generator/models/quote.dart';
 
 abstract class QuotesState {
   const QuotesState();

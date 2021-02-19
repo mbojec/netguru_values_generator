@@ -1,6 +1,6 @@
 // import 'package:flutter/widgets.dart';
 // import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-// import 'package:netguru_values_generator/main.dart';
+// import 'package:quotes_generator/main.dart';
 //
 //
 // // Currently out of usage

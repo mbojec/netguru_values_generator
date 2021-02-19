@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:netguru_values_generator/storage/internal.dart';
+import 'package:quotes_generator/storage/internal.dart';
 
 class ThemeSwitch extends StatefulWidget {
   @override
