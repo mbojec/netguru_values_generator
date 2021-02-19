@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
-import 'package:netguru_values_generator/app.dart';
+import 'package:quotes_generator/app.dart';
 
 final Logger logger = Logger(
   printer: PrettyPrinter(

@@ -5,13 +5,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
-import 'package:netguru_values_generator/blocs/editor/editor.dart';
-import 'package:netguru_values_generator/blocs/editor/state.dart';
-import 'package:netguru_values_generator/components/bottom_bar.dart';
-import 'package:netguru_values_generator/components/btn.dart';
-import 'package:netguru_values_generator/screens/editor/components/animated_btn.dart';
-import 'package:netguru_values_generator/storage/internal.dart';
-import 'package:netguru_values_generator/theme/styles.dart';
+import 'package:quotes_generator/blocs/editor/editor.dart';
+import 'package:quotes_generator/blocs/editor/state.dart';
+import 'package:quotes_generator/components/bottom_bar.dart';
+import 'package:quotes_generator/components/btn.dart';
+import 'package:quotes_generator/screens/editor/components/animated_btn.dart';
+import 'package:quotes_generator/storage/internal.dart';
+import 'package:quotes_generator/theme/styles.dart';
 
 class EditorScreen extends StatefulWidget {
   @override

@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:netguru_values_generator/blocs/favorite/state.dart';
-import 'package:netguru_values_generator/models/quote.dart';
-import 'package:netguru_values_generator/storage/database_helper.dart';
+import 'package:quotes_generator/blocs/favorite/state.dart';
+import 'package:quotes_generator/models/quote.dart';
+import 'package:quotes_generator/storage/database_helper.dart';
 
 class FavoriteQuotesCubit extends Cubit<FavoriteQuotesState>{
   FavoriteQuotesCubit():super(const FavoriteQuotesInitial());

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:netguru_values_generator/models/quote.dart';
+import 'package:quotes_generator/models/quote.dart';
 
 
 class QuoteCard extends StatelessWidget {

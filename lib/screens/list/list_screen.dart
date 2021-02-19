@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:netguru_values_generator/blocs/quotes/quotes.dart';
-import 'package:netguru_values_generator/blocs/quotes/state.dart';
-import 'package:netguru_values_generator/components/btn.dart';
-import 'package:netguru_values_generator/components/quote_card.dart';
+import 'package:quotes_generator/blocs/quotes/quotes.dart';
+import 'package:quotes_generator/blocs/quotes/state.dart';
+import 'package:quotes_generator/components/btn.dart';
+import 'package:quotes_generator/components/quote_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 
