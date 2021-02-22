@@ -1,9 +1,9 @@
-name: netguru_values_generator
-description: Netguru values generator app created for recruitment  purpose.
+name: quotes_generator
+description: Quotes generator app created as a sample app..
 
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 2.0.0+2
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -29,6 +29,7 @@ dependencies:
   # STATE MANAGEMENT
   flutter_bloc: ^6.1.2
   path_provider: ^1.6.24
+  equatable: ^1.2.6
 
 dev_dependencies:
   flutter_test:
@@ -45,10 +46,12 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/ic_launcher.png"
+  image_path_android: "assets/images/ic_launcher_android.png"
+  image_path_ios: "assets/images/ic_launcher_iOS.png"
+
 
 flutter_launcher_name:
-  name: "Netguru VG"
+  name: "Value Generator"
 
 flutter:
   uses-material-design: true

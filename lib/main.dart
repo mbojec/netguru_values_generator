@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
-import 'package:netguru_values_generator/app.dart';
+import 'package:quotes_generator/app.dart';
 
 final Logger logger = Logger(
   printer: PrettyPrinter(
@@ -15,13 +15,18 @@ Future<void> main() async {
   logger.v('Initialing application');
 
   await SystemChrome.setPreferredOrientations(
-      <DeviceOrientation>[DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+    <DeviceOrientation>[
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown
+    ],
+  );
 
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent
-  ));
+  SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
 
-  SystemChrome.setEnabledSystemUIOverlays(<SystemUiOverlay>[SystemUiOverlay.bottom]);
+  SystemChrome.setEnabledSystemUIOverlays(
+    <SystemUiOverlay>[SystemUiOverlay.bottom],
+  );
 
   runApp(App());
 }

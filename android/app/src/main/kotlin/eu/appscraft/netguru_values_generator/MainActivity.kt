@@ -1,4 +1,4 @@
-package eu.appscraft.netguru_values_generator
+package eu.appscraft.quotes_generator
 
 import io.flutter.embedding.android.FlutterActivity
 

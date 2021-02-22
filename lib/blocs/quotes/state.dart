@@ -1,15 +1,22 @@
-import 'package:netguru_values_generator/models/quote.dart';
+import 'package:equatable/equatable.dart';
+import 'package:quotes_generator/models/quote.dart';
 
-abstract class QuotesState {
+abstract class QuotesState extends Equatable {
   const QuotesState();
 }
 
 class QuotesInitial extends QuotesState {
   const QuotesInitial();
+
+  @override
+  List<Object> get props => <Object>[];
 }
 
 class QuotesLoading extends QuotesState {
   const QuotesLoading();
+
+  @override
+  List<Object> get props => <Object>[];
 }
 
 class QuotesLoaded extends QuotesState {
@@ -17,14 +24,7 @@ class QuotesLoaded extends QuotesState {
   const QuotesLoaded(this.quotes);
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
-
-    return o is QuotesLoaded && o.quotes == quotes;
-  }
-
-  @override
-  int get hashCode => quotes.hashCode;
+  List<Object> get props => <Object>[quotes];
 }
 
 class QuotesError extends QuotesState {
@@ -32,12 +32,5 @@ class QuotesError extends QuotesState {
   const QuotesError(this.message);
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
-
-    return o is QuotesError && o.message == message;
-  }
-
-  @override
-  int get hashCode => message.hashCode;
+  List<Object> get props => <Object>[message];
 }

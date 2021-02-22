@@ -1,15 +1,22 @@
-import 'package:netguru_values_generator/models/quote.dart';
+import 'package:equatable/equatable.dart';
+import 'package:quotes_generator/models/quote.dart';
 
-abstract class FavoriteQuotesState {
+abstract class FavoriteQuotesState extends Equatable {
   const FavoriteQuotesState();
 }
 
 class FavoriteQuotesInitial extends FavoriteQuotesState {
   const FavoriteQuotesInitial();
+
+  @override
+  List<Object> get props => <Object>[];
 }
 
 class FavoriteQuotesLoading extends FavoriteQuotesState {
   const FavoriteQuotesLoading();
+
+  @override
+  List<Object> get props => <Object>[];
 }
 
 class FavoriteQuotesLoaded extends FavoriteQuotesState {
@@ -17,14 +24,7 @@ class FavoriteQuotesLoaded extends FavoriteQuotesState {
   const FavoriteQuotesLoaded(this.quotes);
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
-
-    return o is FavoriteQuotesLoaded && o.quotes == quotes;
-  }
-
-  @override
-  int get hashCode => quotes.hashCode;
+  List<Object> get props => <Object>[quotes];
 }
 
 class FavoriteQuotesError extends FavoriteQuotesState {
@@ -32,12 +32,5 @@ class FavoriteQuotesError extends FavoriteQuotesState {
   const FavoriteQuotesError(this.message);
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
-
-    return o is FavoriteQuotesError && o.message == message;
-  }
-
-  @override
-  int get hashCode => message.hashCode;
+  List<Object> get props => <Object>[message];
 }

@@ -1,17 +1,35 @@
-abstract class EditorState {
+import 'package:equatable/equatable.dart';
+
+abstract class EditorState extends Equatable{
   const EditorState();
 }
 
 class EditorInitial extends EditorState {
   const EditorInitial();
+
+  @override
+  List<Object> get props => <Object>[];
+}
+
+class EditorClean extends EditorState {
+  const EditorClean();
+
+  @override
+  List<Object> get props => <Object>[];
 }
 
 class EditorSuccess extends EditorState {
   const EditorSuccess();
+
+  @override
+  List<Object> get props => <Object>[];
 }
 
 class EditorSaving extends EditorState {
   const EditorSaving();
+
+  @override
+  List<Object> get props => <Object>[];
 }
 
 class EditorError extends EditorState {
@@ -19,12 +37,5 @@ class EditorError extends EditorState {
   const EditorError(this.message);
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
-
-    return o is EditorError && o.message == message;
-  }
-
-  @override
-  int get hashCode => message.hashCode;
+  List<Object> get props => <Object>[message];
 }

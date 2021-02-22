@@ -6,6 +6,30 @@ class RouteList {
   static const String settings = '/settings';
 }
 
-const List<String> fundamentalValues = <String>["Exceed clients' and colleagues' expectations", 'Take ownership and question the status quo in a constructive manner',
-  'Be brave, curious and experiment. Learn from all successes and failures', 'Act in a way that makes all of us proud',
-  'Build an inclusive, transparent and socially responsible culture', 'Be ambitious, grow yourself and the people around you', 'Recognize excellence and engagement'];
+const List<String> fundamentalValues = <String>[
+  'Imagination is more important than knowledge',
+  'If music be the food of love, play on',
+  'The way to get started is to quit talking and begin doing',
+  // ignore: lines_longer_than_80_chars
+  'Obstacles are those frightful things you see when you take your eyes off the goal',
+  'I skate where the puck is going to be, not where it has been',
+  'When you come to a fork in the road, take it',
+  // ignore: lines_longer_than_80_chars
+  'We may affirm absolutely that nothing great in the world has been accomplished without passion',
+  'The life which is unexamined is not worth living',
+  'Live as if you were to die tomorrow. Learn as if you were to live forever',
+  // ignore: lines_longer_than_80_chars
+  'What you get by achieving your goals is not as important as what you become by achieving your goals'
+];
+
+class Dimensions {
+  static const double screenSizeBreakpoint = 375.0;
+  static const double bottomBarLargeScreen = 80.0;
+  static const double bottomBarSmallScreen = 56.0;
+  static const double listTopPaddingLargeScreen = 16.0;
+  static const double listTopPaddingSmallScreen = 0.0;
+  static const double listBottomPaddingLargeScreen = 32.0;
+  static const double listBottomPaddingSmallScreen = 16.0;
+  static const double maxDepth = 20.0;
+  static const double baseDepth = 0.0;
+}
