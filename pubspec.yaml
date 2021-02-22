@@ -29,6 +29,7 @@ dependencies:
   # STATE MANAGEMENT
   flutter_bloc: ^6.1.2
   path_provider: ^1.6.24
+  equatable: ^1.2.6
 
 dev_dependencies:
   flutter_test:
