@@ -15,13 +15,18 @@ Future<void> main() async {
   logger.v('Initialing application');
 
   await SystemChrome.setPreferredOrientations(
-      <DeviceOrientation>[DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+    <DeviceOrientation>[
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown
+    ],
+  );
 
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent
-  ));
+  SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
 
-  SystemChrome.setEnabledSystemUIOverlays(<SystemUiOverlay>[SystemUiOverlay.bottom]);
+  SystemChrome.setEnabledSystemUIOverlays(
+    <SystemUiOverlay>[SystemUiOverlay.bottom],
+  );
 
   runApp(App());
 }

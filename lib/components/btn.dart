@@ -1,13 +1,13 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
-Widget BumpButton(IconData icon, Function() onPressed, BuildContext context) {
+Widget bumpButton(IconData icon, Function() onPressed, BuildContext context) {
   return Neumorphic(
     drawSurfaceAboveChild: false,
     style: NeumorphicStyle(
       color: NeumorphicTheme.baseColor(context),
       depth: 10,
-      boxShape: NeumorphicBoxShape.circle(),
+      boxShape: const NeumorphicBoxShape.circle(),
       intensity: 0.3,
       shape: NeumorphicShape.concave,
     ),
@@ -18,7 +18,7 @@ Widget BumpButton(IconData icon, Function() onPressed, BuildContext context) {
         margin: const EdgeInsets.all(3),
         padding: const EdgeInsets.all(14.0),
         style: NeumorphicStyle(
-          boxShape: NeumorphicBoxShape.circle(),
+          boxShape: const NeumorphicBoxShape.circle(),
           color: NeumorphicTheme.variantColor(context),
           depth: 0,
           shape: NeumorphicShape.convex,
@@ -27,7 +27,7 @@ Widget BumpButton(IconData icon, Function() onPressed, BuildContext context) {
   );
 }
 
-Widget ConcaveButton(
+Widget concaveButton(
     {IconData icon, Function() onPressed, BuildContext context}){
   return GestureDetector(
     onTap: (){

@@ -21,3 +21,15 @@ const List<String> fundamentalValues = <String>[
   // ignore: lines_longer_than_80_chars
   'What you get by achieving your goals is not as important as what you become by achieving your goals'
 ];
+
+class Dimensions {
+  static const double screenSizeBreakpoint = 375.0;
+  static const double bottomBarLargeScreen = 80.0;
+  static const double bottomBarSmallScreen = 56.0;
+  static const double listTopPaddingLargeScreen = 16.0;
+  static const double listTopPaddingSmallScreen = 0.0;
+  static const double listBottomPaddingLargeScreen = 32.0;
+  static const double listBottomPaddingSmallScreen = 16.0;
+  static const double maxDepth = 20.0;
+  static const double baseDepth = 0.0;
+}
